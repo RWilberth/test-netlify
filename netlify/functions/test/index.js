@@ -1,17 +1,11 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
-const handler = async (event) => {
-  try {
-    const subject = event.queryStringParameters.name || 'World'
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
-      // // more keys you can return:
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
-    }
-  } catch (error) {
-    return { statusCode: 500, body: error.toString() }
-  }
-}
+import express, { Router } from 'express';
+import serverless from 'serverless-http';
 
-module.exports = { handler }
+const api = express();
+
+const router = Router();
+router.get('/hello', (req, res) => res.send('Hello World!'));
+
+api.use('/api/', router);
+
+export const handler = serverless(api);
