@@ -12,6 +12,11 @@
   from = "/api/*"
   status = 200
   to = "/.netlify/functions/api/:splat"
+[[redirects]]
+  force = true
+  from = "/"
+  status = 200
+  to = "/api"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
